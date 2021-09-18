@@ -9,9 +9,11 @@ class TodoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Todo list',
-      home: TodoList(),
+      home: const TodoList(),
+      theme:
+          ThemeData(brightness: Brightness.dark, primaryColor: Colors.blueGrey),
     );
   }
 }
@@ -47,13 +49,19 @@ class _TodoListState extends State<TodoList> {
   }
 
   void _addTodoItem(String name) {
-    setState(() {
-      _todos.add(Todo(name: name, checked: false));
-    });
+    if (name.isNotEmpty) {
+      setState(() {
+        _todos.add(Todo(name: name, checked: false));
+      });
+    }
     _inputController.clear();
   }
 
-  void _handleTodoChange() {}
+  void _handleTodoChange(Todo todo) {
+    setState(() {
+      todo.checked = !todo.checked;
+    });
+  }
 
   Future<void> _handleDisplayDialog() async {
     return showDialog<void>(
@@ -98,6 +106,15 @@ class TodoItem extends StatelessWidget {
   TodoItem({required this.todo, required this.handleTodoChange})
       : super(key: ObjectKey(todo));
 
+  TextStyle? _getTextStyle(bool checked) {
+    if (!checked) return null;
+
+    return const TextStyle(
+      color: Colors.white54,
+      decoration: TextDecoration.lineThrough,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -107,7 +124,7 @@ class TodoItem extends StatelessWidget {
       leading: CircleAvatar(
         child: Text(todo.name[0]),
       ),
-      title: Text(todo.name),
+      title: Text(todo.name, style: _getTextStyle(todo.checked)),
     );
   }
 }
