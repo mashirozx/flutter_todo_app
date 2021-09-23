@@ -1,4 +1,4 @@
-name: Build Android bundle
+name: Build Android Bundle
 
 on:
   push:
@@ -35,7 +35,6 @@ jobs:
           echo "::set-output name=app_version::$(grep -A3 'version:' pubspec.yaml | head -1 | sed -e 's/version: //g')"
       - name: Release
         uses: softprops/action-gh-release@v1
-        # if: startsWith(github.ref, 'refs/tags/')
         with:
           prerelease: true
           tag_name: debug-${{steps.vars.outputs.app_version}}
