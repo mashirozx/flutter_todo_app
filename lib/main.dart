@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-// import 'pages/todo_list.dart';
-import 'pages/tips.dart';
+import 'pages/todo_list.dart';
+// import 'pages/tips.dart';
 
 void main() {
   return runApp(const TodoApp());
@@ -14,8 +14,8 @@ class TodoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Todo list',
-      // home: const TodoList(),
-      home: const RouterTestRoute(),
+      home: const TodoList(),
+      // home: const RouterTestRoute(),
       theme:
           ThemeData(brightness: Brightness.dark, primaryColor: Colors.blueGrey),
     );
