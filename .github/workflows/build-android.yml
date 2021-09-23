@@ -30,8 +30,8 @@ jobs:
         run: flutter build appbundle
       - name: Set outputs
         id: vars
-        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
         run: |
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)" && \
           echo "::set-output name=app_version::$(grep -A3 'version:' pubspec.yaml | head -1 | sed -e 's/version: //g')"
       - name: Release
         uses: softprops/action-gh-release@v1
