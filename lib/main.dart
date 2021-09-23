@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'pages/todo_list.dart';
-// import 'pages/tips.dart';
+import 'pages/tips.dart';
 
 void main() {
   return runApp(const TodoApp());
