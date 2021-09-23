@@ -40,7 +40,7 @@ class RouterTestRoute extends StatelessWidget {
               },
             ),
           );
-          print("router return value: $result");
+          assert(false, "router return value: $result");
         },
         child: const Text("open tip"),
       ),
