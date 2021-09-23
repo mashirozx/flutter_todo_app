@@ -28,12 +28,15 @@ jobs:
         run: flutter build apk
       - name: Build App Bundle
         run: flutter build appbundle
+      - name: Set outputs
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
       - name: Release
         uses: softprops/action-gh-release@v1
         # if: startsWith(github.ref, 'refs/tags/')
         with:
           prerelease: true
-          tag_name: debug-release
+          tag_name: debug-${{ steps.vars.outputs.sha_short }}
           name: "[debug-release] ${{ github.sha }}"
           body: ${{ github.event.head_commit.message }}
           files: |
